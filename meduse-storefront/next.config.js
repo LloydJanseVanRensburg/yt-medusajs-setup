@@ -13,6 +13,10 @@ module.exports = withStoreConfig({
   images: {
     remotePatterns: [
       {
+        protocol: "https",
+        hostname: "medusa-bucket-andi.s3.eu-central-1.amazonaws.com",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
       },
