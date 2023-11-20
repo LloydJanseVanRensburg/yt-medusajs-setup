@@ -78,6 +78,9 @@ const plugins = [
       write_key: process.env.SEGMENT_WRITE_KEY,
     },
   },
+  {
+    resolve: `medusa-plugin-wishlist`,
+  },
 ];
 
 const modules = {
