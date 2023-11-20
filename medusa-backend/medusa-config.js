@@ -29,7 +29,7 @@ const ADMIN_CORS =
 const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 
 const DATABASE_URL =
-  process.env.DATABASE_URL || "postgres://localhost/medusa-store";
+  process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
@@ -52,16 +52,42 @@ const plugins = [
       },
     },
   },
+  {
+    resolve: `medusa-file-s3`,
+    options: {
+        s3_url: process.env.S3_URL,
+        bucket: process.env.S3_BUCKET,
+        region: process.env.S3_REGION,
+        access_key_id: process.env.S3_ACCESS_KEY_ID,
+        secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
+        cache_control: process.env.S3_CACHE_CONTROL,
+    },
+  },
+  {
+    resolve: `medusa-payment-stripe`,
+    options: {
+      capture: true,
+      automatic_payment_methods: true,
+      api_key: process.env.STRIPE_API_KEY,
+      // webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
+    },
+  },
+  {
+    resolve: `medusa-plugin-segment`,
+    options: {
+      write_key: process.env.SEGMENT_WRITE_KEY,
+    },
+  },
+  {
+    resolve: `medusa-plugin-wishlist`,
+  },
 ];
 
 const modules = {
-  /*eventBus: {
-    resolve: "@medusajs/event-bus-redis",
-    options: {
-      redisUrl: REDIS_URL
-    }
-  },
-  cacheService: {
+  // eventBus: {
+  //   resolve: "@medusajs/event-bus-redis",
+  // },
+  /*cacheService: {
     resolve: "@medusajs/cache-redis",
     options: {
       redisUrl: REDIS_URL
@@ -84,5 +110,9 @@ const projectConfig = {
 module.exports = {
   projectConfig,
   plugins,
-  modules,
+  modules: {
+    eventBus: {
+      resolve: "@medusajs/event-bus-local",
+    },
+  },
 };

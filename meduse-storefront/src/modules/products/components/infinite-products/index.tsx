@@ -1,4 +1,4 @@
-import { fetchProductsList } from "@lib/data"
+import { getProductsList } from "@lib/data"
 import usePreviews from "@lib/hooks/use-previews"
 import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
 import repeat from "@lib/util/repeat"
@@ -26,18 +26,22 @@ const InfiniteProducts = ({ params }: InfiniteProductsType) => {
       p.cart_id = cart.id
     }
 
+    if (cart?.region?.currency_code) {
+      p.currency_code = cart.region.currency_code
+    }
+
     p.is_giftcard = false
 
     return {
       ...p,
       ...params,
     }
-  }, [cart?.id, params])
+  }, [cart?.id, cart?.region, params])
 
   const { data, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery(
       [`infinite-products-store`, queryParams, cart],
-      ({ pageParam }) => fetchProductsList({ pageParam, queryParams }),
+      ({ pageParam }) => getProductsList({ pageParam, queryParams }),
       {
         getNextPageParam: (lastPage) => lastPage.nextPage,
       }
