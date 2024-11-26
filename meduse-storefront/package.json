@@ -32,14 +32,14 @@
     "clsx": "^1.1.1",
     "lodash": "^4.17.21",
     "medusa-react": "^9.0.0",
-    "next": "^13.4.5",
+    "next": "^15.0.3",
     "react": "^18.2.0",
     "react-country-flag": "^3.0.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.30.0",
     "react-instantsearch-hooks-web": "^6.29.0",
     "react-intersection-observer": "^9.3.4",
-    "sharp": "^0.30.7"
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -51,7 +51,7 @@
     "@types/react-instantsearch-dom": "^6.12.3",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
-    "cypress": "^9.5.2",
+    "cypress": "^13.16.0",
     "eslint": "8.10.0",
     "eslint-config-next": "^13.4.5",
     "postcss": "^8.4.8",
